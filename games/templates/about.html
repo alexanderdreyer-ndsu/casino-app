@@ -1,0 +1,24 @@
+{% block title %}About{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/about.css' %}">
+
+    <div id="text-container">
+        <p class="text">
+            My name is Alec Dreyer and I am a 3rd year Computer Science student at NDSU.
+            This website was created using javascript, html, css, and django for the backend.
+            I plan on adding to this website in the future.
+        </p>
+
+        <p class="text">
+            5x3 slot machine pays out 0.77 : 1
+            <br/>
+            3x1 slot machine pays out 0.9 : 1
+        </p>
+
+        <a href="{% url 'home' %}">
+            <button id="go-home-button">Return Home</button>
+        </a>
+    </div>
+{% endblock %}

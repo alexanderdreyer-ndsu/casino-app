@@ -1,0 +1,71 @@
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    
+    <div id="popular-games-title">
+        <h1>All Games</h1>
+    </div>
+
+    <div class="container">
+        <a href="{% url 'roulette' %}" id="roulette-cell">
+            <button class="game-btns" id="roulette">Play Roulette</button>
+        </a>
+
+        <a href="{% url 'slots' %}" id="slots-cell">
+            <button class="game-btns" id="slots">Play Slots</button>
+        </a>
+
+        <a href="{% url 'blackjack' %}" id="blackjack-cell">
+            <button class="game-btns" id="blackjack">Play Blackjack</button>
+        </a>
+
+        <a href="{% url 'classic_slots' %}" id="classic-slots-cell">
+            <button class="game-btns" id="classic-slots">Play Classic Slots</button>
+        </a>
+
+        <a href="{% url 'minesweep' %}" id="minesweep-cell">
+            <button class="game-btns" id="minesweep">Play Minesweep</button>
+        </a>
+    </div>
+
+    <div id="bottom-text">
+        <a href="{% url 'about' %}">
+            <p id="about-link">About</p>
+        </a>
+    </div>
+
+    <style>
+        #roulette {
+            background-image: url("{% static 'images/home/view-roulette-game-casino_23-2151007731.avif' %}");
+            background-size: cover;
+            background-position-y: center;
+        }
+
+        #slots {
+            background-image: url("{% static 'images/home/eugenia-vorontsova-promo-bg1.jpg' %}");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        #blackjack {
+            background-image: url("{% static 'images/home/blackjack1.webp'%}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #minesweep {
+            background-image: url("{% static 'images/home/minesweep_background.jpg'%}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #classic-slots {
+            background-image: url("{% static 'images/home/classic-slots-logo.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+{% endblock %}

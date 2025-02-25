@@ -1,0 +1,40 @@
+{% extends 'navbar.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        {% if messages %}
+            {% for message in messages%}
+                <div class="alert alert-warning alert-dismissible fade show navbar-item" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %} 
+        {% endif %}
+
+        <h1>Login</h1>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label class="form-label">Username</label>
+            <br/>
+            <input type="text" class="form-input" name="username">
+            <br/>
+            <label class="form-label">Password</label>
+            <br/>
+            <input type="password" class="form-input" name="password">
+            <br/>
+            <input type="submit" value="Submit">
+        </form>
+
+        <a href="{% url 'register_user' %}" id="register-btn">
+            <button class="register-btn">New User</button>
+        </a>
+
+    </div>
+
+    
+{% endblock %}

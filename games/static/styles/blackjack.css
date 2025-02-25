@@ -1,0 +1,125 @@
+body {
+    background: radial-gradient(circle, forestgreen, black);
+}
+
+.page-all {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    padding: 25px;
+    color: white;
+    margin: 0px auto;
+    width: 1200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px;
+    margin-left: -550px;
+}
+
+.dealer-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: fit-content;
+    position: absolute;
+}
+
+.player-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: fit-content;
+    position: absolute;
+    margin-top: 200px;
+}
+
+.player-control-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 350px;
+    margin-right: 130px;
+}
+
+.game-btns {
+    background-color: #ddc300;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    transition: 150ms;
+}
+.game-btns:hover {
+    background-color: hsl(53, 100%, 33%);
+}
+.game-btns:active {
+    scale: 1.2;
+}
+.game-btns:disabled {
+    background-color: hsl(53, 100%, 13%);
+}
+
+.game-cards {
+    height: 70px;
+    width: 50px;
+    border-radius: 2px;
+}
+
+#deck-and-game-output {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 20px 0;
+    width: 100%;
+    min-height: 50px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium';
+}
+
+#display-dealer-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin-left: 10px;
+}
+
+#display-player-cards {
+    display: flex;
+    gap: 0.5em;
+    border: none;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#display-player-split-cards {
+    display: flex;
+    gap: 0.5em;
+    border: none;
+    padding: 10px;
+    border-radius: 7px;
+    margin-left: 40px;
+}
+
+.slideInTop {
+    animation: slideInTop 0.7s ease-out;
+}
+
+@keyframes slideInTop {
+    from {
+        transform: translateX(10vh) translateY(-100vh);
+    }
+
+    to {
+        transform: translateX(0) translateY(0);
+    }
+}

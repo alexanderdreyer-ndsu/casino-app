@@ -1,0 +1,76 @@
+{% extends 'navbar.html' %}
+
+{% block title %}Play Minesweep{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/minesweep.css' %}">
+
+    <body id="body">
+        <div class="container">
+            <div id="game-controlls">
+                <div id="bet-container" class="bet-and-bombs">
+                    Bet
+                    <input class="form-input" id="input" type="number" min="0" placeholder="0.00">
+                </div>
+    
+                <div id="bombs-container" class="bet-and-bombs">
+                    Bombs
+                    <input class="form-input" id="bomb-count" type="number" min="1" max="24" placeholder="1 - 24">
+                </div>
+    
+                <div id="buttons-container">
+                    <button id="play-btn">Play</button>
+                    <button id="cashout">Cash Out</button>
+                </div>
+            </div>
+    
+            <div id="table-display">
+                <h1 id="multiplier-header">Multiplier</h1>
+    
+                <table id="table">
+                    <tr class="row">
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                    </tr>
+    
+                    <tr class="row">
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                    </tr>
+    
+                    <tr class="row">
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                    </tr>
+    
+                    <tr class="row">
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                    </tr>
+    
+                    <tr class="row">
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                        <td class="cell" contains-bomb="0"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    
+        <script src="{% static 'scripts/minesweep.js' %}"></script>
+{% endblock %}

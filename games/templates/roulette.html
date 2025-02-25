@@ -1,0 +1,98 @@
+{% extends 'navbar.html' %}
+
+{% block title %}Play Roulette{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/roulette.css' %}">
+    <body id="body">
+        <div id="timer-information-and-clear-bet-btn">
+            <button id="clear-bet">Clear Bet</button>
+            <h2 id="timer">30</h2>
+            <h4 id="bets-available-label">Bets Open</h4>
+        </div>
+
+        <div id="tableDiv">
+            <div id="previous-numbers"></div>
+
+            <table id="betting-table">
+                <tr>
+                    <td class="game-cell zero zero-top"></td>
+                    <td id="3" data-value="3" class="game-cell redCell">3</td>
+                    <td id="6" data-value="6" class="game-cell blackCell">6</td>
+                    <td id="9" data-value="9" class="game-cell redCell">9</td>
+                    <td id="12" data-value="12" class="game-cell redCell">12</td>   
+                    <td id="15" data-value="15" class="game-cell blackCell">15</td>
+                    <td id="18" data-value="18" class="game-cell redCell">18</td>
+                    <td id="21" data-value="21" class="game-cell redCell">21</td>
+                    <td id="24" data-value="24" class="game-cell blackCell">24</td>
+                    <td id="27" data-value="27" class="game-cell redCell">27</td>
+                    <td id="30" data-value="30" class="game-cell redCell">30</td>
+                    <td id="33" data-value="33" class="game-cell blackCell">33</td>
+                    <td id="36" data-value="36" class="game-cell redCell">36</td>
+                    <td id="2 to 1" data-value="two-to-one-top" class="two-to-one-cell">2 to 1</td>
+                </tr>
+                
+                <tr>
+                    <td id="0" data-value="0" class="game-cell zero zero-middle">0</td>
+                    <td id="2" data-value="2" class="game-cell blackCell">2</td>
+                    <td id="5" data-value="5" class="game-cell redCell">5</td>
+                    <td id="8" data-value="8" class="game-cell blackCell">8</td>
+                    <td id="11" data-value="11" class="game-cell blackCell">11</td>
+                    <td id="14" data-value="14" class="game-cell redCell">14</td>
+                    <td id="17" data-value="17" class="game-cell blackCell">17</td>
+                    <td id="20" data-value="20" class="game-cell blackCell">20</td>
+                    <td id="23" data-value="23" class="game-cell redCell">23</td>
+                    <td id="26" data-value="26" class="game-cell blackCell">26</td>
+                    <td id="29" data-value="29" class="game-cell blackCell">29</td>
+                    <td id="32" data-value="32" class="game-cell redCell">32</td>
+                    <td id="35" data-value="35" class="game-cell blackCell">35</td>
+                    <td id="2 to 1" data-value="two-to-one-middle" class="two-to-one-cell">2 to 1</td>
+                </tr>
+
+                <tr>
+                    <td class="game-cell zero zero-bottom"></td>
+                    <td id="1" data-value="1" class="game-cell redCell">1</td>
+                    <td id="4" data-value="4" class="game-cell blackCell">4</td>
+                    <td id="7" data-value="7" class="game-cell redCell">7</td>
+                    <td id="10" data-value="10" class="game-cell blackCell">10</td>
+                    <td id="13" data-value="13" class="game-cell blackCell">13</td>
+                    <td id="16" data-value="16" class="game-cell redCell">16</td>
+                    <td id="19" data-value="19" class="game-cell redCell">19</td>
+                    <td id="22" data-value="22" class="game-cell blackCell">22</td>
+                    <td id="25" data-value="25" class="game-cell redCell">25</td>
+                    <td id="28" data-value="28" class="game-cell blackCell">28</td>
+                    <td id="31" data-value="31" class="game-cell blackCell">31</td>
+                    <td id="34" data-value="34" class="game-cell redCell">34</td>
+                    <td id="2 to 1" data-value="two-to-one-bottom" class="two-to-one-cell">2 to 1</td>
+                </tr>
+            </table>
+            <table id="secondaryBets">
+                <tr>
+                    <td id="1/12" data-value="1/12" class="twelvesCells">1/12</td>
+                    <td id="2/12" data-value="2/12" class="twelvesCells">2/12</td>
+                    <td id="3/12" data-value="3/12" class="twelvesCells">3/12</td>
+                </tr>
+            </table>
+            <table id="secondaryBets2">
+                <tr>
+                    <td id="1 to 18" data-value="1 to 18" class="defaultCell">1 to 18</td>
+                    <td id="Evens" data-value="Evens" class="defaultCell">Evens</td>
+                    <td id="Red" data-value="Red" class="Red">Red</td>
+                    <td id="Black" data-value="Black" class="Black">Black</td>
+                    <td id="Odds" data-value="Odds" class="defaultCell">Odds</td>
+                    <td id="19 to 36" data-value="19 to 36" class="defaultCell">19 to 36</td>
+                </tr>
+            </table>
+
+            <div id="buttonsDiv">
+                <button id="1" class="chips">1</button>
+                <button id="5" class="chips">5</button>
+                <button id="10" class="chips">10</button>
+                <button id="25" class="chips">25</button>
+            </div>
+        </div>
+    </body>
+
+    <script src="{% static 'scripts/roulette.js' %}"></script>
+{% endblock %}

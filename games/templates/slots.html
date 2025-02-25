@@ -1,0 +1,49 @@
+{% extends 'navbar.html' %}
+
+{% block title %}Play Slots{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/slots.css' %}">
+    
+    <div class="container" id="game">
+        <div id="doors">
+            <div class="door"></div>
+
+            <div class="door"></div>
+
+            <div class="door"></div>
+
+            <div class="door"></div>
+
+            <div class="door"></div> 
+        </div>
+
+        <div id="game-controls">
+            <div id="modify-bet-div">
+                <button id="subtract" class="bettingBtns">-</button>
+                <h3 id="betDisplay">$0</h3>
+                <button id="add" class="bettingBtns">+</button>
+            </div>
+
+            <div id="previous-win-div">
+                <h3 id="prevWinLabel">Win: $</h3>
+                <h3 id="prevWinDisplay">0.00</h3>
+            </div>
+
+            <button id="max-bet-btn" class="bettingBtns">Max Bet</button>
+            <button id="spinBtn">Spin</button>
+        </div>
+    </div>
+
+    <script src="{% static 'scripts/slots.js' %}"></script>
+
+    <style>
+        body {
+            background-image: url("{% static 'images/slots/cartoon-forest-background-1920-x-1080-0xhrzw9zvozynyqh.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }        
+    </style>
+{% endblock %}

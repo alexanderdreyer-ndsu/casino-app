@@ -1,3 +1,93 @@
+//SHOE CLASS
+class Shoe {
+    constructor() {
+        this.shoe = [];
+
+        const suites = ["Spades", "Hearts", "Clubs", "Diamonds"];
+        const values = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
+
+        for (let suite of suites) {
+            for (let numValue of values) {
+                let card = new Card(numValue, suite, window.staticPaths.cardPath + `${numValue}Of${suite}.png`);
+                this.shoe.push(card);
+            }
+        }
+    }
+
+    drawCard() {
+        const drawIndex = Math.floor(Math.random() * this.shoe.length);
+        const card = this.shoe[drawIndex];
+
+        return card;
+    }
+}
+
+
+
+
+//HAND CLASS
+class Hand {
+    constructor() {
+        this.cards = [];
+        this.count = 0;
+        this.selected = false;
+        this.betOnThisHand = 0;
+    }
+
+    calculateHandCount() {
+        this.count = 0;
+
+        for (let card of this.cards) {
+            const value = card.numValue;
+            
+            const faceCards = ["Jack", "Queen", "King"];
+
+            if (faceCards.includes(value)) {
+                this.count += 10;
+            } else if (value === "Ace") {
+                this.count += 11;
+            } else {
+                this.count += parseInt(value);
+            }
+        }
+
+        return this.count;
+    }
+
+    addToHand(card) {
+        this.cards.push(card);
+        this.calculateHandCount();
+    }
+
+    popFromHand(removeThisCard) {
+        for (const img of document.querySelectorAll(".game-cards")) {
+            if (img.src.includes(`${removeThisCard.numValue}Of${removeThisCard.suite}`) && this.cards.includes(removeThisCard)) {
+                img.parentElement.removeChild(img);
+                break;
+            }
+        }
+
+        this.cards.splice(1, 1);
+        this.calculateHandCount();
+    }
+}
+
+
+
+
+//CARD CLASS
+class Card {
+    constructor (numValue, suite, imagePath) {
+        this.numValue = numValue;
+        this.suite = suite;
+        this.imagePath = imagePath;
+    }
+}
+
+
+
+
+//GAME LOGIC
 const playBtn = document.querySelector("#play-btn");
 const hitBtn = document.querySelector("#hit-btn");
 const stayBtn = document.querySelector("#stay-btn");
@@ -346,7 +436,7 @@ async function game() {
     faceDownCard = shoe.drawCard();
     dealerHand.addToHand(faceDownCard);
 
-    faceDownCardImage.src = "../../Images/Blackjack/backOfCard.jpeg";
+    faceDownCardImage.src = window.staticPaths.backOfCard;
     faceDownCardImage.className = "game-cards slideInTop";
 
     dealerCardDisplay.appendChild(faceDownCardImage);

@@ -40,8 +40,12 @@
 
     </div>
 
-    <script src="{% static 'scripts/blackjack/shoe.js' %}"></script>
-    <script src="{% static 'scripts/blackjack/hand.js' %}"></script>
-    <script src="{% static 'scripts/blackjack/card.js' %}"></script>
-    <script src="{% static 'scripts/blackjack/main.js' %}"></script>
+    <script>
+        window.staticPaths = {
+            backOfCard: "{% static 'images/blackjack/backOfCard.jpeg' %}",
+            cardPath: "{% static 'images/blackjack/' %}"
+        }
+    </script>
+
+    <script src="{% static 'scripts/blackjack.js' %}"></script>
 {% endblock %}

@@ -21,7 +21,7 @@
         {% if user.is_authenticated %}
             <div id="balance-navbar-item">
                 <h3 id="balance-label">$</h3>
-                <h3 id="balance-output">10</h3>
+                <h3 id="balance-output">{{ user.balance }}</h3>
             </div>
 
             <a href="{% url 'logout' %}" id="logout-user-btn">

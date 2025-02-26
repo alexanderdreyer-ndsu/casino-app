@@ -7,6 +7,7 @@ try {
     console.log(err + "\nUnknown Balance");
     balance = 0;
 }
+balanceDisplay.textContent = balance.toFixed(2);
 const cashoutListeners = [];
 
 play.addEventListener("click", () => {

@@ -59,9 +59,6 @@ body {
 .game-btns:hover {
     background-color: hsl(53, 100%, 33%);
 }
-.game-btns:active {
-    scale: 1.2;
-}
 .game-btns:disabled {
     background-color: hsl(53, 100%, 13%);
 }

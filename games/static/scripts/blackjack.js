@@ -103,19 +103,11 @@ const dealerHand = new Hand();
 const playerHand1 = new Hand();
 const playerHand2 = new Hand();
 let shoe = new Shoe();
-let balance;
-try {
-    balance = Number(balanceOutput.textContent);
-} catch (err) {
-    console.log(err + "\nUnknown Balance");
-    balance = 0;
-}
 let originalBet, totalBet, faceDownCard;
 
 dealerHand.cardDisplay = dealerCardDisplay;
 playerHand1.cardDisplay = playerCardDisplay;
 playerHand2.cardDisplay = playerSplitCardDisplay;
-balanceOutput.textContent = balance.toFixed(2);
 
 function drawCard(hand) {
     const card = shoe.drawCard();
@@ -145,7 +137,7 @@ function endGame() {
     disableButtons();
     calculateWinner();
 
-    balanceOutput.textContent = balance.toFixed(2);
+    balanceOutput.textContent = localBalance.toFixed(2);
 
     setTimeout(() => {
         playBtn.disabled = false;
@@ -157,7 +149,8 @@ function endGameFromCheckForBlackjack() {
 
     disableButtons();
 
-    balanceOutput.textContent = balance.toFixed(2);
+    balanceOutput.textContent = localBalance.toFixed(2);
+    updateBalanceField(localBalance);
 
     setTimeout(() => {
         playBtn.disabled = false;
@@ -171,7 +164,7 @@ function checkForBlackjack() {
 
     if (!checkDidPlayerSplit) {
         if (isDealerBlackjack) {
-            isPlayerBlackjack ? balance += playerHand1.betOnThisHand : balance = balance;
+            isPlayerBlackjack ? localBalance += playerHand1.betOnThisHand : localBalance = localBalance;
 
             displayGameInfo.textContent = `${isPlayerBlackjack ? "Push" : "Dealer Blackjack"}`;
 
@@ -179,7 +172,7 @@ function checkForBlackjack() {
         }
 
         if (isPlayerBlackjack) {
-            balance += playerHand1.betOnThisHand * 2.5;
+            localBalance += playerHand1.betOnThisHand * 2.5;
 
             displayGameInfo.textContent = "Player Blackjack";
 
@@ -190,7 +183,7 @@ function checkForBlackjack() {
     const isPlayer2Blackjack = playerHand2.count === 21;
 
     if (isPlayerBlackjack && isPlayer2Blackjack) {
-        balance += totalBet * 2.5;
+        localBalance += totalBet * 2.5;
 
         displayGameInfo.textContent = "Player Hand 1 Blackjack, Player Hand 2 Blackjack";
 
@@ -198,7 +191,7 @@ function checkForBlackjack() {
     } 
     
     if (isPlayerBlackjack) {
-        balance += playerHand1.betOnThisHand * 2.5;
+        localBalance += playerHand1.betOnThisHand * 2.5;
 
         displayGameInfo.textContent = "Player Hand 1 Blackjack";
 
@@ -206,7 +199,7 @@ function checkForBlackjack() {
     }
     
     if (isPlayer2Blackjack) {
-        balance += playerHand2.betOnThisHand * 2.5;
+        localBalance += playerHand2.betOnThisHand * 2.5;
 
         playerHand1.selected = true;
         playerHand2.selected = false;
@@ -235,12 +228,12 @@ function calculateWinner() {
 
     if (!checkDidPlayerSplit) {
         if (dealerScore !== playerScore) {
-            dealerWon ? balance = balance : balance += playerHand1.betOnThisHand * 2;
+            dealerWon ? localBalance = localBalance : localBalance += playerHand1.betOnThisHand * 2;
 
             return displayGameInfo.textContent = `${dealerWon ? "Dealer Win" : "Player Win"}`;
         }
 
-        balance += totalBet;
+        localBalance += totalBet;
         return displayGameInfo.textContent = "Push";
     }
 
@@ -251,21 +244,21 @@ function calculateWinner() {
     console.log(`Player 2 score = ${player2Score}`);
 
     if (dealerScore !== playerScore) {
-        dealerWon ? balance = balance : balance += playerHand1.betOnThisHand * 2;
+        dealerWon ? localBalance = localBalance : localBalance += playerHand1.betOnThisHand * 2;
 
         dealerVsPlayer1Message = dealerWon ? "Dealer Win Hand 1" : "Player Win Hand 1";
     } else {
-        balance += totalBet;
+        localBalance += totalBet;
 
         dealerVsPlayer1Message = "Push";
     }
 
     if (dealerScore !== player2Score) {
-        dealerWonHand2 ? balance = balance : balance += playerHand2.betOnThisHand * 2;
+        dealerWonHand2 ? localBalance = localBalance : localBalance += playerHand2.betOnThisHand * 2;
 
         dealerVsPlayer2Message = dealerWonHand2 ? "Dealer Win Hand 2" : "Player Win Hand 2";
     } else {
-        balance += totalBet;
+        localBalance += totalBet;
 
         dealerVsPlayer2Message = "Push";
     }
@@ -338,8 +331,8 @@ function hit() {
 }
 
 function double() {
-    balance -= originalBet;
-    balanceOutput.textContent = balance.toFixed(2);
+    localBalance -= originalBet;
+    balanceOutput.textContent = localBalance.toFixed(2);
 
     if (playerHand1.selected) {
         playerHand1.betOnThisHand += originalBet;
@@ -386,9 +379,9 @@ function stay() {
 }
 
 function split() {
-    balance -= originalBet;
+    localBalance -= originalBet;
     playerHand2.betOnThisHand = playerHand1.betOnThisHand;
-    balanceOutput.textContent = balance.toFixed(2);
+    balanceOutput.textContent = localBalance.toFixed(2);
 
     splitBtn.disabled = true;
 
@@ -416,14 +409,14 @@ async function game() {
     clearHand(playerHand2);
     displayGameInfo.textContent = "";
 
-    originalBet = Number(userBetInput) >= 0.01 && Number(userBetInput) <= balance ? Number(userBetInput) : 0;
+    originalBet = Number(userBetInput) >= 0.01 && Number(userBetInput) <= localBalance ? Number(userBetInput) : 0;
 
     if (originalBet === 0) return window.alert("Invalid Bet");
 
     playerHand1.betOnThisHand = originalBet;
     totalBet = originalBet;
-    balance -= totalBet;
-    balanceOutput.textContent = balance.toFixed(2);
+    localBalance -= totalBet;
+    balanceOutput.textContent = localBalance.toFixed(2);
 
     playBtn.disabled = true;
 
@@ -458,9 +451,9 @@ async function game() {
     
     checkForSplitAllowed(playerHand1) ? splitBtn.disabled = false : splitBtn.disabled = true;
     hitBtn.addEventListener("click", hit);
-    if (balance - originalBet >= 0) doubleBtn.addEventListener("click", double);
+    if (localBalance - originalBet >= 0) doubleBtn.addEventListener("click", double);
     stayBtn.addEventListener("click", stay);
-    if (balance - originalBet >= 0) splitBtn.addEventListener("click", split);
+    if (localBalance - originalBet >= 0) splitBtn.addEventListener("click", split);
     stayBtn.disabled = false;
     hitBtn.disabled = false;
     doubleBtn.disabled = false;

@@ -3,16 +3,7 @@ const bettingBtns = document.querySelectorAll(".bettingBtns");
 const balanceOutput = document.querySelector("#balance-output");
 const betDisplay = document.querySelector("#betDisplay");
 const prevWinDisplay = document.querySelector("#prevWinDisplay");
-let balance;
-try {
-    balance = Number(balanceOutput.textContent);
-} catch (err) {
-    console.log(err + "\nUnknown Balance");
-    balance = 0;
-}
 let bet = 0;
-
-balanceOutput.textContent = balance.toFixed(2);
 betDisplay.textContent = bet.toFixed(2);
 
 function generateSpin() {
@@ -81,8 +72,8 @@ function payout(spunRow, bet) {
 
 function spin() {
     spinBtn.disabled = true;
-    balance -= bet;
-    balanceOutput.textContent = balance.toFixed(2);
+    localBalance -= bet;
+    balanceOutput.textContent = localBalance.toFixed(2);
     const spunRow = generateSpin();
 
     setTimeout(() => {
@@ -93,10 +84,11 @@ function spin() {
 
     setTimeout(() => {
         const payoutAmount = payout(spunRow, bet);
-        balance += payoutAmount;
+        localBalance += payoutAmount;
 
-        balanceOutput.textContent = balance.toFixed(2);
+        balanceOutput.textContent = localBalance.toFixed(2);
         prevWinDisplay.textContent = payoutAmount.toFixed(2);
+        updateBalanceField(localBalance);
     }, 2200);
 }
 
@@ -123,7 +115,7 @@ function main() {
     }
 
     spinBtn.addEventListener("click", () => {
-        if (bet > 0 && balance - bet >= 0) spin();
+        if (bet > 0 && localBalance - bet >= 0) spin();
     });
 }
 

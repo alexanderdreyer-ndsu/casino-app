@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -41,3 +42,18 @@ def register_user(request):
     return render(request, 'authenticate/register_user.html', {
         'form' : form,
     })
+
+def update_balance(request):
+    if request.method == "POST":
+        newBalance = request.POST.get('newBalance')
+
+        if newBalance is not None:
+            try:
+                newBalance = float(newBalance)
+            except: 
+                return JsonResponse({'status': 'failure', 'type': 'newBalance not numeric'})
+            user = request.user
+            user.balance = newBalance
+            user.save()
+            return JsonResponse({'newBalance': user.balance, 'status': 'success'})
+    return JsonResponse({'status': 'failure'})

@@ -95,4 +95,34 @@
     </body>
 
     <script src="{% static 'scripts/roulette.js' %}"></script>
+
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        var csrfToken = document.querySelector('[name="csrf-token"]').content;
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        });
+
+        window.localBalance = {{ user.balance }}
+
+        window.urlObj = {
+            updatedBalance: "{% url 'update_balance' %}"
+        }
+
+        function updateBalanceField(newBalance){
+            var data = {'newBalance': newBalance};
+            $.post(urlObj.updatedBalance, data, function(response){
+                if (response.status === 'success'){
+                    localBalance = response.newBalance;
+                }
+            });
+        }
+    </script>
+
 {% endblock %}

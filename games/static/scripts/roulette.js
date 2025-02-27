@@ -10,13 +10,6 @@ const timer = document.querySelector("#timer");
 
 let chipSize = 0;
 let thisBet = 0;
-let balance;
-try {
-    balance = Number(balanceDisplay.textContent);
-} catch (err) {
-    console.log(err + "\nUnknown Balance");
-    balance = 0;
-}
 let timeUntilSpin = 30;
 let betsClosed;
 let userBets = new Map();
@@ -87,9 +80,10 @@ function spin() {
         }
     }
 
-    balance += payout(userBets, spinNumberAndColor[0], spinNumberAndColor[1]);
+    localBalance += payout(userBets, spinNumberAndColor[0], spinNumberAndColor[1]);
+    updateBalanceField(localBalance)
     userBets.clear();
-    balanceDisplay.textContent = balance.toFixed(2);
+    balanceDisplay.textContent = localBalance.toFixed(2);
     thisBet = 0;
     clearBet();
 }
@@ -109,8 +103,9 @@ function updateTimer() {
 
 function clearBet() {
     userBets.clear();
-    balance += thisBet;
-    balanceDisplay.textContent = balance.toFixed(2);
+    localBalance += thisBet;
+    balanceDisplay.textContent = localBalance.toFixed(2);
+    updateBalanceField(localBalance);
     thisBet = 0;
 
     for (let cell of cells) {
@@ -121,7 +116,7 @@ function clearBet() {
 }
 
 function addBet(cell) {
-    if (balance < chipSize) return window.alert("Insufficient funds");
+    if (localBalance < chipSize) return window.alert("Insufficient funds");
 
     if (userBets.has(cell.dataset.value)) {
         console.log(cell.dataset.value)
@@ -133,7 +128,7 @@ function addBet(cell) {
 
         userBets.set(cell.dataset.value, currentBetOnThisCell + chipSize);
 
-        balance -= chipSize;
+        localBalance -= chipSize;
         thisBet += chipSize;
 
         cell.textContent = "";
@@ -144,7 +139,7 @@ function addBet(cell) {
 
         userBets.set(cell.dataset.value, chipSize);
 
-        balance -= chipSize;
+        localBalance -= chipSize;
         thisBet += chipSize;
 
         cell.textContent = "";
@@ -152,11 +147,9 @@ function addBet(cell) {
         cell.appendChild(chipToBeDisplayed);
     }
 
-    balanceDisplay.textContent = balance.toFixed(2);
+    balanceDisplay.textContent = localBalance.toFixed(2);
+    updateBalanceField(localBalance);
 }
-
-
-balanceDisplay.textContent = balance.toFixed(2);
 
 for (let i = 0; i < 37; i++) {
     validStrings.push(i.toString());

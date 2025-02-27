@@ -1,13 +1,5 @@
 const balanceDisplay = document.querySelector("#balance-output");
 const play = document.querySelector("#play-btn");
-let balance;
-try {
-    balance = Number(balanceDisplay.textContent);
-} catch (err) {
-    console.log(err + "\nUnknown Balance");
-    balance = 0;
-}
-balanceDisplay.textContent = balance.toFixed(2);
 const cashoutListeners = [];
 
 play.addEventListener("click", () => {
@@ -16,11 +8,12 @@ play.addEventListener("click", () => {
     const bet = document.querySelector("#input").value;
     const bombs = document.querySelector("#bomb-count").value;
     const multiplierHeader = document.querySelector("#multiplier-header");
-    if ((bet > balance || bet <= 0) || (bombs < 1 || bombs > 24)) return;
+    if ((bet > localBalance || bet <= 0) || (bombs < 1 || bombs > 24)) return;
     play.disabled = true;
     cashoutBtn.disabled = true;
-    balance -= bet;
-    balanceDisplay.textContent = balance.toFixed(2);
+    localBalance -= bet;
+    balanceDisplay.textContent = localBalance.toFixed(2);
+    updateBalanceField(localBalance);
     multiplierHeader.textContent = "Multiplier 0x";
     let payoutMultiplier = 0;
 
@@ -61,7 +54,7 @@ play.addEventListener("click", () => {
     cashoutBtn.addEventListener("click", cashout);
 
     const cashoutHandler = () => {
-        balance += bet * payoutMultiplier;
+        localBalance += bet * payoutMultiplier;
         gameOver();
     };
 
@@ -74,7 +67,8 @@ play.addEventListener("click", () => {
             if (cell.classList.contains("flipped-bomb")) cell.textContent = "💣";
         });
     
-        balanceDisplay.textContent = balance.toFixed(2);
+        balanceDisplay.textContent = localBalance.toFixed(2);
+        updateBalanceField(localBalance);
         play.disabled = false;
         cashoutBtn.disabled = true;
     }

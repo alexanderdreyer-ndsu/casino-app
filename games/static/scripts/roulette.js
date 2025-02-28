@@ -81,9 +81,9 @@ function spin() {
     }
 
     localBalance += payout(userBets, spinNumberAndColor[0], spinNumberAndColor[1]);
-    updateBalanceField(localBalance)
     userBets.clear();
     balanceDisplay.textContent = localBalance.toFixed(2);
+    updateBalanceField(localBalance);
     thisBet = 0;
     clearBet();
 }
@@ -148,7 +148,6 @@ function addBet(cell) {
     }
 
     balanceDisplay.textContent = localBalance.toFixed(2);
-    updateBalanceField(localBalance);
 }
 
 for (let i = 0; i < 37; i++) {

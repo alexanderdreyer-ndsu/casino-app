@@ -138,6 +138,7 @@ function endGame() {
     calculateWinner();
 
     balanceOutput.textContent = localBalance.toFixed(2);
+    updateBalanceField(localBalance);
 
     setTimeout(() => {
         playBtn.disabled = false;

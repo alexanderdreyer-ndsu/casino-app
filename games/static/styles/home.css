@@ -5,6 +5,31 @@ body {
     align-items: center;
 }
 
+#header{
+    color: white;
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    justify-content: space-evenly;
+    font-weight: bold;
+}
+
+.home-links{
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 250ms;
+}
+
+.home-links:hover{
+    text-decoration: underline white;
+    text-decoration-thickness: 2px;
+    
+}
+
+.home-links:visited{
+    color: white;
+}
+
 .game-btns {
     border: none;
     border-radius: 25px;

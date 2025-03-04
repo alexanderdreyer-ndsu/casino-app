@@ -14,6 +14,18 @@ body {
     font-weight: bold;
 }
 
+.home-buttons{
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.926);
+}
+
+.home-buttons:hover{
+    background-color: rgba(255, 255, 255, 0.781);
+}
+
 .home-links{
     text-decoration: none;
     font-size: 1rem;
@@ -23,7 +35,6 @@ body {
 .home-links:hover{
     text-decoration: underline white;
     text-decoration-thickness: 2px;
-    
 }
 
 .home-links:visited{
@@ -77,6 +88,7 @@ body {
     justify-content: center;
     font-family: sans-serif;
     font-weight: bold;
+    margin: 20px 0;
 }
 
 #about-link:hover {

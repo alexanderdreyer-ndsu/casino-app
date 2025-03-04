@@ -8,9 +8,13 @@
     <div id="header">
         {% if user.is_authenticated %}
             <h2>Welcome {{ user.username }}</h2>
-            <a href="{% url 'logout' %}" class="home-links">Logout</a>
+            <a href="{% url 'logout' %}">
+                <button class="home-buttons">Logout</button>
+            </a>
         {% else %}
-            <a href="{% url 'login' %}" class="home-links" >Login</a>
+            <a href="{% url 'login' %}">
+                <button class="home-buttons">Login</button>
+            </a>
         {% endif %}
     </div>
 

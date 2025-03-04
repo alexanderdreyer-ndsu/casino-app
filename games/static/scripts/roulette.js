@@ -117,6 +117,7 @@ function clearBet() {
 
 function addBet(cell) {
     if (localBalance < chipSize) return window.alert("Insufficient funds");
+    if (thisBet + chipSize > 100) return window.alert("Max Bet 100");
 
     if (userBets.has(cell.dataset.value)) {
         console.log(cell.dataset.value)

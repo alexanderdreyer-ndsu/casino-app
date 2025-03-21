@@ -1,0 +1,70 @@
+{% extends 'navbar.html' %}
+
+{% block title %}Play Horse Racing{% endblock %}
+
+{% block content %}
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'styles/horse_racing.css' %}">
+        
+    <div class="container">
+        <h3 id="bet-info-label">Horse Racing</h3>
+
+        <div id="game" class="game">
+            <div class="lane"></div>
+            <div class="lane"></div>
+            <div class="lane"></div>
+        </div>
+
+        <br/>
+        <button id="play-btn" class="game-btns">Play</button>
+
+        <dialog id="bet-menu">
+            <form id="bet-input-form">
+                <h1>Bet Menu</h1>
+                <label for="lanes">Lanes</label>
+                <br/>
+                <input id="lanes" type="number" min="3" max="5" step="1" placeholder="3-5" required>
+                <br/>
+                <label for="bet">Bet</label>
+                <br/>
+                <input id="bet" type="number" min="0.01" step="0.01" placeholder="$" required>
+                <br/>
+                <label for="on-lane">On Lane</label>
+                <br/>
+                <input id="on-lane" type="number" min="1" max="5" step="1" placeholder="1-lanes" required>
+                <br/>
+                <br/>
+                <input type="Submit" id="submit-bet-btn" value="Confirm" class="game-btns">
+            </form>
+        </dialog>
+    </div>
+
+<script src="{% static 'scripts/horse_racing.js' %}"></script>
+
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var csrfToken = document.querySelector('[name="csrf-token"]').content;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRFToken': csrfToken
+        }
+    });
+
+    window.localBalance = {{ user.balance }}
+
+    function updateBalanceField(newBalance) {
+        var data = {'newBalance': newBalance};
+        $.post("{% url 'update_balance' %}", data, function(response){
+            if (response.status === 'success') {
+                localBalance = response.newBalance;
+            }
+        });
+    }
+</script>
+
+{% endblock %}

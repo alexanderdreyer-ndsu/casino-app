@@ -42,6 +42,10 @@
         <a href="{% url 'minesweep' %}" id="minesweep-cell">
             <button class="game-btns" id="minesweep">Play Minesweep</button>
         </a>
+
+        <a href="{% url 'horse_racing' %}" id="horse_racing-cell">
+            <button class="game-btns" id="horse_racing">Play Horse Racing</button>
+        </a>
     </div>
 
     <div id="bottom-text">
@@ -75,6 +79,12 @@
 
         #classic-slots {
             background-image: url("{% static 'images/home/classic-slots-logo.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #horse_racing {
+            background-image: url("{% static 'images\home\istockphoto-478244976-612x612.jpg' %}");
             background-size: cover;
             background-position: center;
         }

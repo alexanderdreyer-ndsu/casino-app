@@ -1,0 +1,92 @@
+body{
+    padding: 0;
+    margin: 0;
+    background: rgb(33, 33, 33);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+
+.game{
+    height: 400px;
+    width: 80%;
+    background: darkolivegreen;
+    border-radius: 45px;
+    border: 10px rgb(115, 30, 30) solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.lane{
+    margin: 5px auto;
+    width: 91%;
+    border-top: 2px white solid;
+    border-bottom: 2px white solid;
+    border-right: 30px white solid;
+    height: 60px;
+    transition: 250ms;
+    position: relative;
+}
+
+.game-btns{
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(79, 79, 255);
+    font-size: 1.2rem;
+    padding: 3px;
+    font-weight: bold;
+    color: rgb(225, 225, 225);
+    transition: 150ms;
+}
+
+.game-btns:hover{
+    color: white;
+    background-color: rgb(89, 89, 252);
+}
+
+.horse{
+    left: 0;
+    width: 25px;
+    height: 25px;
+    font-size: 2rem;
+    height: 50px;
+    position: absolute;
+}
+
+input{
+    width: 100%;
+}
+
+#submit-bet-btn{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#bet-info-label{
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    margin: 10px 0;
+}
+
+#bet-menu{
+    border: none;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+form{
+    gap: 15px;
+}

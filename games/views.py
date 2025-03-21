@@ -22,3 +22,6 @@ def minesweep(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def horse_racing(request):
+    return render(request, 'horse_racing.html')

@@ -27,6 +27,7 @@ betInputForm.addEventListener("submit", (event) => {
     for (let i = 0; i < lanes; i++) {
         const thisLane = document.createElement("div");
         thisLane.classList.add("lane");
+        thisLane.id = `Lane ${i + 1}`;
         gameWindow.appendChild(thisLane);
 
         const thisHorse = document.createElement("div");

@@ -32,7 +32,6 @@ class Hand {
         this.count = 0;
         this.selected = false;
         this.betOnThisHand = 0;
-        this.trackAcesReduced = 0;
     }
 
     calculateHandCount() {
@@ -123,12 +122,10 @@ function drawCard(hand) {
 }
 
 function clearHand(hand) {
-    const images = document.querySelectorAll(".game-cards");
-
     hand.cards = [];
     hand.count = 0;
             
-    images.forEach(img => {
+    document.querySelectorAll(".game-cards").forEach(img => {
         img.parentElement.removeChild(img);
     });
 }
@@ -267,10 +264,13 @@ function disableButtons() {
 
 function reduceHandAces(hand) {
     if (hand.count <= 21) return;
+
     let numberOfAces = hand.cards.filter(card => card.numValue === "Ace").length;
-    while (hand.count > 21 && hand.trackAcesReduced < numberOfAces) {
+    let trackAcesReduced = 0;
+
+    while (hand.count > 21 && trackAcesReduced < numberOfAces) {
         hand.count -= 10;
-        hand.trackAcesReduced++;
+        trackAcesReduced++;
     }
 }
 
@@ -286,6 +286,7 @@ function runDealerTurn() {
 
     if (dealerHand.count - 10 === 7 && dealerHand.cards.some(card => card.numValue === 'Ace')) {
         drawCard(dealerHand);
+        reduceHandAces(dealerHand);
     }
 
     endGame(true);
@@ -299,16 +300,16 @@ function hit() {
     reduceHandAces(playerHand1);
     reduceHandAces(playerHand2);
 
-    const didPlayerSplit = playerHand2.count !== 0;
-
     if (playerHand1.count < 21) {
         doubleBtn.disabled = true;
         splitBtn.disabled = true;
         return;
     }
-    
-    if (playerHand1.count > 21 && !didPlayerSplit) return endGame(true);
-    
+
+    if (playerHand1.count >= 21 && playerHand2.count === 0) {
+        return playerHand1.count > 21 ? endGame(true) : runDealerTurn();
+    }
+
     if (playerHand2.count > 21 || playerHand2.count === 21) {
         return playerHand2.count > 21 ? endGame(true) : runDealerTurn();
     }
@@ -337,7 +338,7 @@ function double() {
         playerHand2.betOnThisHand += originalBet;
 
         drawCard(playerHand2);
-        reduceHandAces(playerHand2)
+        reduceHandAces(playerHand2);
         runDealerTurn();
     }
 

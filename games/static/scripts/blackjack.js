@@ -50,6 +50,14 @@ class Hand {
                 this.count += parseInt(value);
             }
         }
+        
+        let numberOfAces = this.cards.filter(card => card.numValue === "Ace").length;
+        let trackAcesReduced = 0;
+        
+        while (this.count > 21 && trackAcesReduced < numberOfAces) {
+            this.count -= 10;
+            trackAcesReduced++;
+        }
 
         return this.count;
     }
@@ -262,31 +270,13 @@ function disableButtons() {
     splitBtn.disabled = true;
 }
 
-function reduceHandAces(hand) {
-    if (hand.count <= 21) return;
-
-    let numberOfAces = hand.cards.filter(card => card.numValue === "Ace").length;
-    let trackAcesReduced = 0;
-
-    while (hand.count > 21 && trackAcesReduced < numberOfAces) {
-        hand.count -= 10;
-        trackAcesReduced++;
-    }
-}
-
 function runDealerTurn() {
-    if (dealerHand.count === 22) {
-        reduceHandAces(dealerHand);
-    }
-
     while (dealerHand.count < 17) {
         drawCard(dealerHand);
-        reduceHandAces(dealerHand);
     }
 
     if (dealerHand.count - 10 === 7 && dealerHand.cards.some(card => card.numValue === 'Ace')) {
         drawCard(dealerHand);
-        reduceHandAces(dealerHand);
     }
 
     endGame(true);
@@ -296,9 +286,6 @@ function hit() {
     if (playerHand1.selected && playerHand1.count < 21) drawCard(playerHand1);
 
     if (playerHand2.selected && playerHand2.count < 21) drawCard(playerHand2);
-
-    reduceHandAces(playerHand1);
-    reduceHandAces(playerHand2);
 
     if (playerHand1.count < 21) {
         doubleBtn.disabled = true;
@@ -331,14 +318,12 @@ function double() {
         playerHand1.betOnThisHand += originalBet;
 
         drawCard(playerHand1);
-        reduceHandAces(playerHand1);
     }
 
     if (playerHand2.selected) {
         playerHand2.betOnThisHand += originalBet;
 
         drawCard(playerHand2);
-        reduceHandAces(playerHand2);
         runDealerTurn();
     }
 

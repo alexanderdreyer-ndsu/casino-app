@@ -1,11 +1,8 @@
-
-{% block title %}Home{% endblock %}
-
 {% block content %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
     
-    <div id="header">
+    <header>
         {% if user.is_authenticated %}
             <h2>Welcome {{ user.username }}</h2>
             <a href="{% url 'logout' %}">
@@ -16,7 +13,7 @@
                 <button class="home-buttons">Login</button>
             </a>
         {% endif %}
-    </div>
+    </header>
 
     <div id="popular-games-title">
         <h1>All Games</h1>
@@ -48,9 +45,9 @@
         </a>
     </div>
 
-    <div id="bottom-text">
+    <footer>
         <a href="{% url 'about' %}" class="home-links">About</a>
-    </div>
+    </footer>
 
     <style>
         #roulette {

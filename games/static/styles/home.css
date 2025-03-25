@@ -1,17 +1,21 @@
 body {
-    background-color: black;
+    background: rgb(32, 32, 32);
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Arial', sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
-#header{
-    color: white;
+header{
     display: flex;
     align-items: baseline;
     width: 100%;
     justify-content: space-evenly;
     font-weight: bold;
+    background: #f3f3f3;
+    padding: 10px;
 }
 
 .home-buttons{
@@ -19,11 +23,11 @@ body {
     border-radius: 5px;
     font-size: 1.5rem;
     padding: 5px 10px;
-    background-color: rgba(255, 255, 255, 0.926);
+    background-color: rgba(241, 172, 11, 0.926);
 }
 
 .home-buttons:hover{
-    background-color: rgba(255, 255, 255, 0.781);
+    background-color: rgba(200, 143, 11, 0.926);
 }
 
 .home-links{
@@ -48,7 +52,7 @@ body {
     font-weight: bold;
     font-size: 2rem;
     color: white;
-    min-width: 415px;
+    min-width: 370px;
     min-height: 200px;
     color: white;
     -webkit-text-stroke: 1px black;
@@ -57,38 +61,25 @@ body {
 .game-btns:hover {
     scale: 1.05;
     outline: 3px solid gold;
-    outline-offset: 10px;
+    outline-offset: 5px;
     animation: borderOutlineGrowing 2s ease-in-out infinite;
 }
 
 .container {
     display: grid;
-    grid-template-rows: 200px 200px;
-    grid-template-columns: 1fr 1fr;
-    margin: 10px auto;
-    width: fit-content;
-    gap: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center;
+    width: 90%;
 }
 
-#roulette-cell {
-    grid-area: 0 / 1 / 1 / 2;
-}
-
-#slots-cell {
-    grid-area: 1 / 2 / 2 / 3;
-}
-
-#blackjack-cell {
-    grid-area: 2 / 3 / 0 / 3;
-}
-
-#bottom-text {
+footer {
     display: flex;
     color: grey;
     justify-content: center;
     font-family: sans-serif;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 25px 0;
 }
 
 #about-link:hover {

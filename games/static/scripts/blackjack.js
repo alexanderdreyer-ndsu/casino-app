@@ -297,7 +297,7 @@ function hit() {
         return playerHand1.count > 21 ? endGame(true) : runDealerTurn();
     }
 
-    if (playerHand2.count > 21 || playerHand2.count === 21) {
+    if (playerHand2.count >= 21) {
         return playerHand2.count > 21 ? endGame(true) : runDealerTurn();
     }
 
